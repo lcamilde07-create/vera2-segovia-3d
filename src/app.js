@@ -66,6 +66,7 @@ const state = {
     aguasLluvias: false,
     drenajes: false,
     tuberias: true,
+    pozos: true,
     eje: false,
     limite: true,
     planimetria: false,
@@ -215,6 +216,10 @@ async function boot() {
     const onGround = active ? (e, n) => droneGround(e, n) ?? site.elevationAt(e, n) : null;
     repopulate(works, buildWorks(model, site, onWorks));
     repopulate(planimetry, buildPlanimetry(model, site, onGround));
+    // la boca del MH se apoya en la superficie actual: la del dron si esta
+    // activo, o la rasante de diseno en caso contrario
+    const onGroundMH = active ? (e, n) => droneGround(e, n) ?? drape(e, n) : drape;
+    repopulate(manholes, buildManholes(model, site, onGroundMH));
     chimneys.userData.setGroundSampler(active ? droneGround : null);
     // los materiales nuevos tienen que entrar al recorte transversal
     cut.collect(
@@ -320,7 +325,7 @@ async function boot() {
     viewer.setLayerVisible("planimetria", L.planimetria);
     viewer.setLayerVisible("geosinteticos", L.geosinteticos);
     viewer.setLayerVisible("zanja", L.geosinteticos);
-    viewer.setLayerVisible("pozos", L.filtros || L.tuberias);
+    viewer.setLayerVisible("pozos", L.pozos);
     viewer.setLayerVisible("puntosTopo", L.puntos);
     viewer.setLayerVisible("rotulos", L.rotulos);
     viewer.setLayerVisible("planoReferencia", L.planoReferencia);

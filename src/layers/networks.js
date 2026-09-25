@@ -464,8 +464,15 @@ export function buildNetworks(model, site, drape, bottomDrape) {
 }
 
 /** Pozos de inspeccion con su cota de fondo real publicada en el plano. */
-export function buildManholes(model, site, drape) {
+export function buildManholes(model, site, ground) {
   const group = new THREE.Group();
+  // superficie sobre la que se apoya la boca del MH: la actual visible (rasante
+  // de diseno o, con el vuelo activo, la malla del dron). Si no hay muestra, el
+  // terreno del MDT. Asi la camara queda sobre el suelo y no enterrada.
+  const surfaceAt = (e, n) => {
+    const s = ground ? ground(e, n) : null;
+    return s === null || s === undefined ? site.elevationAt(e, n) : s;
+  };
   const unresolved = [];
   // Item 4.12: diametro interior variable. Estas medidas solo explican la forma.
   const POZO_DIAMETRO_VISUAL = 1.8;
@@ -479,17 +486,13 @@ export function buildManholes(model, site, drape) {
   // tapa de fundición del manhole (anillo + tapa oscura) para que se lea como
   // una cámara real; encima, las iniciales pequeñas del MH
   const ironMat = new THREE.MeshStandardMaterial({ color: 0x2b333a, roughness: 0.55, metalness: 0.45 });
-  // material del marcador (pin) del MH: se dibuja SIEMPRE por encima del
-  // terreno y del vuelo de dron para poder localizarlo, aunque la camara este
-  // lejos o la camara quede dentro del vaso.
   const BEACON_H = 8;      // m, alto del poste-marcador sobre la tapa
   const MH_TOP_RADIUS = 3; // m, radio visual de la tapa del MH (~6 m de diametro)
   const MH_DRUM_H = 1.4;   // m, alto del tambor que sobresale del terreno
-  // la camara del MH se dibuja por encima del terreno (depthTest:false) para que
-  // no quede enterrada donde la malla del terreno o del dron pasa por encima de
-  // la cota de la boca; renderOrder por debajo del pin para que el pin gane.
-  const mhBodyMat = new THREE.MeshStandardMaterial({ color: PALETTE.concrete, roughness: 0.9, metalness: 0, depthTest: false });
-  const mhIronMat = new THREE.MeshStandardMaterial({ color: 0x2b333a, roughness: 0.55, metalness: 0.45, depthTest: false });
+  // Solo el PIN (poste + cabeza) y el rotulo se dibujan en rayos X (depthTest
+  // false) para poder localizar el MH a distancia. La camara (tambor + tapa)
+  // tiene profundidad real y se apoya en la superficie actual: no atraviesa el
+  // terreno, no miente sobre su posicion.
   const beaconMat = new THREE.MeshBasicMaterial({ color: 0xf2b705, depthTest: false, depthWrite: false, transparent: true });
   const makeInitials = (text) => {
     const c = document.createElement("canvas");
@@ -516,14 +519,15 @@ export function buildManholes(model, site, drape) {
     // quede escondido a ras de suelo.
     const topR = MH_TOP_RADIUS;
     const drumH = MH_DRUM_H * site.exaggeration;
-    // cuerpo (brocal de concreto) que sobresale del suelo, dibujado por encima
-    const drum = new THREE.Mesh(new THREE.CylinderGeometry(topR, topR, drumH, 32), mhBodyMat);
-    drum.position.set(x, ytop + drumH / 2, z); drum.renderOrder = 9;
+    // cuerpo (brocal de concreto) que sobresale del suelo, con profundidad real
+    const drum = new THREE.Mesh(new THREE.CylinderGeometry(topR, topR, drumH, 32), shell);
+    drum.position.set(x, ytop + drumH / 2, z);
+    drum.castShadow = true; drum.receiveShadow = true;
     // aro y tapa de fundicion encima del tambor
-    const rim = new THREE.Mesh(new THREE.TorusGeometry(topR + 0.2, 0.32, 10, 28), mhIronMat);
-    rim.rotation.x = -Math.PI / 2; rim.position.set(x, ytop + drumH + 0.04, z); rim.renderOrder = 10;
-    const cover = new THREE.Mesh(new THREE.CircleGeometry(topR, 32), mhIronMat);
-    cover.rotation.x = -Math.PI / 2; cover.position.set(x, ytop + drumH + 0.06, z); cover.renderOrder = 10;
+    const rim = new THREE.Mesh(new THREE.TorusGeometry(topR + 0.2, 0.32, 10, 28), ironMat);
+    rim.rotation.x = -Math.PI / 2; rim.position.set(x, ytop + drumH + 0.04, z);
+    const cover = new THREE.Mesh(new THREE.CircleGeometry(topR, 32), ironMat);
+    cover.rotation.x = -Math.PI / 2; cover.position.set(x, ytop + drumH + 0.06, z);
 
     // pin siempre visible: poste fino + cabeza, para localizar el MH a distancia
     const h = drumH + BEACON_H * site.exaggeration;
@@ -540,7 +544,7 @@ export function buildManholes(model, site, drape) {
     group.add(drum, rim, cover, post, head, label);
   };
   for (const pozo of model.puntos.pozos || []) {
-    const top = site.elevationAt(pozo.east, pozo.north);
+    const top = surfaceAt(pozo.east, pozo.north);
     if (top === null || !Number.isFinite(pozo.elev) || top <= pozo.elev) {
       unresolved.push(`${pozo.id}: fondo ${pozo.elev}, MDT ${top === null ? "fuera de cobertura" : top.toFixed(2)}; profundidad no positiva o no resoluble`);
       const marker = new THREE.Mesh(new THREE.OctahedronGeometry(0.5),shell);

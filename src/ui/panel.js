@@ -32,6 +32,7 @@ const LAYER_GROUPS = [
       ["geosinteticos", "Geosintéticos", "Geotextil NT 2000 / geomembrana 60 mils / geotextil NT 2000"],
       ["filtros", "Filtros de lixiviados", "Zanja drenante de 0,78 m con bolo, malla y tubería PEAD perforada"],
       ["tuberias", "Tuberías PEAD", 'Tubería de lixiviados de 6" y 10", con diámetro real en el filtro'],
+      ["pozos", "Pozos / MH", "Cámaras de salida de lixiviado (tamaño visual 6 m); clic muestra el nombre"],
       ["aguasLluvias", "Manejo de aguas lluvias", "Drenaje perimetral de aguas lluvias"],
       ["drenajes", "Drenajes y cunetas", "Cunetas y desagües del levantamiento"],
     ],
@@ -84,10 +85,10 @@ const CONSTRUCCION = [
           vias: true }, phase: 1 },
   { label: "4 · Impermeabilización", sub: "geosintéticos y filtros",
     on: { topografia: true, movimiento: true, dique: true, jarillon: true, geosinteticos: true,
-          filtros: true, tuberias: true }, phase: 1 },
+          filtros: true, tuberias: true, pozos: true }, phase: 1 },
   { label: "5 · Llenado etapa 1", sub: "residuos + chimeneas",
     on: { topografia: true, movimiento: true, dique: true, jarillon: true, chimeneas: true,
-          filtros: true, tuberias: true }, phase: 1 },
+          filtros: true, tuberias: true, pozos: true }, phase: 1 },
   { label: "6 · Llenado etapa 2", sub: "recrecimiento",
     on: { topografia: true, movimiento: true, dique: true, jarillon: true, chimeneas: true }, phase: 2 },
   { label: "7 · Llenado etapa 3", sub: "recrecimiento",
@@ -97,7 +98,7 @@ const CONSTRUCCION = [
 ];
 /* capas que la secuencia controla: se apagan salvo las que el paso encienda */
 const CONSTRUCCION_KEYS = ["topografia","planimetria","curvas","movimiento","dique",
-  "chimeneas","geosinteticos","filtros","tuberias","aguasLluvias","drenajes","vias",
+  "chimeneas","geosinteticos","filtros","tuberias","pozos","aguasLluvias","drenajes","vias",
   "estabilizacion","curvasProyecto","superficieObras","superficieLlenado","boxCulvert","jarillon"];
 
 export function buildUi(ctx) {
@@ -200,6 +201,7 @@ function applyViewPreset(ctx, key) {
       geosinteticos: true,
       filtros: true,
       tuberias: true,
+      pozos: true,
       aguasLluvias: true,
       drenajes: true,
       movimiento: true,
@@ -221,7 +223,7 @@ function applyViewPreset(ctx, key) {
       planimetria: false,
       vias: false,
       rotulos: false,
-      filtros: false, tuberias: false, aguasLluvias: false, drenajes: false,
+      filtros: false, tuberias: false, pozos: false, aguasLluvias: false, drenajes: false,
       chimeneas: false, estabilizacion: false, alcantarillas: false,
     });
   }
@@ -417,7 +419,7 @@ function buildDrainageInspection(ctx) {
     document.querySelector("#legend").style.display = "none";
     Object.assign(ctx.state.layers, { curvas: false, planimetria: false, puntos: false,
       eje: false, rotulos: false, aguasLluvias: true, dron: false, planoReferencia: false,
-      geosinteticos: false, chimeneas: false, filtros: false, tuberias: false,
+      geosinteticos: false, chimeneas: false, filtros: false, tuberias: false, pozos: false,
       drenajes: false, vias: false, estabilizacion: false, topografia: false,
       movimiento: false, dique: false, superficieObras: false, superficieLlenado: false });
     document.querySelectorAll("#layer-controls input[data-layer]").forEach((input) => {
