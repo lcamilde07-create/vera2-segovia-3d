@@ -1,0 +1,245 @@
+{
+  "titulo": "Box culvert bajo los vasos 2 y 3 (ubicacion indicada)",
+  "fuente": {
+    "seccion": "laminas de ocupacion de cauce (enero de 2022): data/box-culvert-2022.json",
+    "ubicacion": "indicada por el equipo del proyecto: parte mas baja del relleno, bajo los vasos 2 y 3. La lamina de 2022 licencia la estructura en la esquina noroccidental del lote (georreferenciacion comprobada contra sus cinco coordenadas impresas, dif. 1,4 m).",
+    "eje": "vaguada de los vasos: eje de replanteo del vaso 2 (el fondo drena al norte) empalmado con el del vaso 3 hasta su punto mas bajo",
+    "invert": "2.30 m bajo el minimo entre rasante de fondo y terreno natural (recubrimiento de 0.30 m sobre el box de 2.00 m), monotono aguas abajo; representacion declarada, sin perfil hidraulico propio"
+  },
+  "seccion": {
+    "anchoInterior": 1.5,
+    "altoInterior": 1.5,
+    "espesorPared": 0.25,
+    "espesorLosa": 0.25,
+    "solado": 0.05,
+    "concreto": "f'c 21 MPa (3000 PSI)",
+    "filtrosLaterales": "piedra a ambos costados del box (lamina dimensional)"
+  },
+  "eje": [
+    {
+      "station": 0.0,
+      "east": 933107.24,
+      "north": 1275251.62
+    },
+    {
+      "station": 12.0,
+      "east": 933117.87,
+      "north": 1275257.18
+    },
+    {
+      "station": 123.43,
+      "east": 933216.62,
+      "north": 1275308.81
+    },
+    {
+      "station": 133.43,
+      "east": 933207.87,
+      "north": 1275303.97
+    },
+    {
+      "station": 143.43,
+      "east": 933199.13,
+      "north": 1275299.11
+    },
+    {
+      "station": 153.43,
+      "east": 933190.38,
+      "north": 1275294.27
+    },
+    {
+      "station": 163.43,
+      "east": 933181.64,
+      "north": 1275289.41
+    },
+    {
+      "station": 173.43,
+      "east": 933172.89,
+      "north": 1275284.56
+    },
+    {
+      "station": 183.43,
+      "east": 933164.15,
+      "north": 1275279.7
+    },
+    {
+      "station": 193.43,
+      "east": 933155.41,
+      "north": 1275274.85
+    },
+    {
+      "station": 203.43,
+      "east": 933146.66,
+      "north": 1275270.0
+    },
+    {
+      "station": 213.43,
+      "east": 933137.92,
+      "north": 1275265.14
+    },
+    {
+      "station": 223.43,
+      "east": 933129.18,
+      "north": 1275260.29
+    },
+    {
+      "station": 233.43,
+      "east": 933120.43,
+      "north": 1275255.45
+    },
+    {
+      "station": 243.43,
+      "east": 933111.69,
+      "north": 1275250.59
+    },
+    {
+      "station": 283.43,
+      "east": 933076.72,
+      "north": 1275231.18
+    }
+  ],
+  "camaras": [],
+  "entrada": {
+    "station": 0.0,
+    "east": 933107.24,
+    "north": 1275251.62
+  },
+  "salida": {
+    "station": 283.43,
+    "east": 933076.72,
+    "north": 1275231.18
+  },
+  "perfilTerreno": [
+    {
+      "station": 0.0,
+      "z": 492.44
+    },
+    {
+      "station": 12.0,
+      "z": 492.07
+    },
+    {
+      "station": 123.43,
+      "z": 489.84
+    },
+    {
+      "station": 133.43,
+      "z": 486.76
+    },
+    {
+      "station": 143.43,
+      "z": 487.52
+    },
+    {
+      "station": 153.43,
+      "z": 487.57
+    },
+    {
+      "station": 163.43,
+      "z": 488.1
+    },
+    {
+      "station": 173.43,
+      "z": 488.37
+    },
+    {
+      "station": 183.43,
+      "z": 488.85
+    },
+    {
+      "station": 193.43,
+      "z": 489.19
+    },
+    {
+      "station": 203.43,
+      "z": 489.63
+    },
+    {
+      "station": 213.43,
+      "z": 490.53
+    },
+    {
+      "station": 223.43,
+      "z": 490.59
+    },
+    {
+      "station": 233.43,
+      "z": 492.39
+    },
+    {
+      "station": 243.43,
+      "z": 491.87
+    },
+    {
+      "station": 283.43,
+      "z": 498.98
+    }
+  ],
+  "perfilBox": [
+    {
+      "station": 0.0,
+      "z": 491.59
+    },
+    {
+      "station": 12.0,
+      "z": 491.59
+    },
+    {
+      "station": 123.43,
+      "z": 490.55
+    },
+    {
+      "station": 133.43,
+      "z": 486.81
+    },
+    {
+      "station": 143.43,
+      "z": 487.49
+    },
+    {
+      "station": 153.43,
+      "z": 487.63
+    },
+    {
+      "station": 163.43,
+      "z": 488.23
+    },
+    {
+      "station": 173.43,
+      "z": 488.59
+    },
+    {
+      "station": 183.43,
+      "z": 488.55
+    },
+    {
+      "station": 193.43,
+      "z": 489.35
+    },
+    {
+      "station": 203.43,
+      "z": 489.81
+    },
+    {
+      "station": 213.43,
+      "z": 490.71
+    },
+    {
+      "station": 223.43,
+      "z": 490.53
+    },
+    {
+      "station": 233.43,
+      "z": 491.46
+    },
+    {
+      "station": 243.43,
+      "z": 494.33
+    },
+    {
+      "station": 283.43,
+      "z": 494.13
+    }
+  ],
+  "franja": false,
+  "advertencia": "Ubicacion indicada por el equipo, sin lamina propia en el expediente: el eje sigue la vaguada de los vasos 2 y 3 y el invert es de representacion. La seccion si es la de las laminas de 2022."
+}

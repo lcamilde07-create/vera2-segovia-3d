@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visor 3D · Relleno sanitario VERA II — Segovia</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="src/styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div>
+            <h1 id="project-title">Visor 3D</h1>
+            <p class="eyebrow"><span id="project-crs"></span></p>
+          </div>
+        </div>
+
+        <nav id="view-modes" class="view-modes" aria-label="Modos de vista"></nav>
+
+        <div class="topbar-right">
+          <div class="stat">
+            <span class="stat-label">Extensión</span>
+            <strong id="stat-area">—</strong>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Cotas</span>
+            <strong id="stat-elev">—</strong>
+          </div>
+        </div>
+      </header>
+
+      <aside class="sidebar" aria-label="Capas del modelo">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Capas</h2>
+          </div>
+          <div id="layer-controls" class="control-list"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Fases de operación</h2>
+          </div>
+          <div id="phase-control" class="phase-control" aria-label="Fase visible"></div>
+          <p class="panel-note">
+            Superficie resultante de la fase elegida segun las rasantes del plano.
+            Los colores identifican cada vaso y etapa.
+          </p>
+        </div>
+
+        <div class="panel panel-section" id="section-panel">
+          <div class="panel-head">
+            <h2>Corte transversal</h2>
+          </div>
+          <label class="select-row">
+            <span>Vaso</span>
+            <select id="section-basin"></select>
+          </label>
+          <div class="slider-row">
+            <input id="section-station" type="range" min="0" max="290" step="5" value="145" />
+            <output id="section-value">0+145</output>
+          </div>
+          <svg id="section-drawing" class="section-drawing" role="img" aria-label="Sección transversal del plano"></svg>
+          <p class="panel-note">
+            Corta el modelo perpendicular al eje elegido. La tapa 3D y el perfil 2D
+            salen de las secciones transversales del plano.
+          </p>
+        </div>
+
+        <div class="panel panel-drone" id="drone-panel">
+          <div class="panel-head">
+            <h2>Vuelo de dron</h2>
+          </div>
+          <div class="slider-row">
+            <input id="drone-opacity" type="range" min="10" max="100" step="5" value="100" />
+            <output id="drone-opacity-value">100 %</output>
+          </div>
+          <p class="panel-note" id="drone-note"></p>
+        </div>
+
+        <div class="panel panel-construccion" id="construccion-panel">
+          <div class="panel-head">
+            <h2>Fases constructivas</h2>
+          </div>
+          <div id="construccion-steps" class="phase-control"></div>
+          <p class="panel-note" id="construccion-note">
+            Secuencia de obra: obras iniciales, cortes y accesos, excavación,
+            impermeabilización y llenado por etapas.
+          </p>
+        </div>
+
+        <div class="panel panel-ortho" id="ortho-panel">
+          <div class="panel-head">
+            <h2>Ortofoto del dron</h2>
+          </div>
+          <label class="select-row">
+            <span>Vuelo</span>
+            <select id="ortho-flight"></select>
+          </label>
+          <p class="panel-note">
+            Imagen aérea real del sitio drapeada sobre el terreno. Muestra qué parte del
+            relleno representa el modelo y cómo cambió entre vuelos.
+          </p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Exageración vertical</h2>
+          </div>
+          <div class="slider-row">
+            <input id="exaggeration" type="range" min="10" max="30" step="1" value="10" />
+            <output id="exaggeration-value">1.0x</output>
+          </div>
+          <p class="panel-note">
+            A 1.0x las proporciones son las reales del terreno.
+          </p>
+        </div>
+      </aside>
+
+      <main class="viewport">
+        <canvas id="scene"></canvas>
+
+        <div id="readout" class="readout"></div>
+
+        <div id="legend" class="legend" aria-label="Leyenda"></div>
+
+        <div id="loading" class="loading">
+          <div class="spinner" aria-hidden="true"></div>
+          <p>Cargando visor 3D</p>
+          <small id="loading-detail"></small>
+        </div>
+
+        <p class="hint">
+          Arrastrar: orbitar &nbsp;·&nbsp; Rueda: zoom &nbsp;·&nbsp; Clic derecho: desplazar
+        </p>
+      </main>
+
+      <aside class="inspector" aria-label="Información técnica">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Plano de referencia</h2>
+          </div>
+          <div id="plan-list" class="plan-list"></div>
+          <dl class="meta">
+            <div><dt>Plano</dt><dd id="plan-title">—</dd></div>
+            <div><dt>Archivo</dt><dd id="plan-file">—</dd></div>
+            <div><dt>Escala de planta</dt><dd id="plan-scale">—</dd></div>
+            <div><dt>Georreferencia</dt><dd id="plan-georef">—</dd></div>
+          </dl>
+          <ul id="plan-notes" class="notes"></ul>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Parámetros de diseño</h2>
+          </div>
+          <dl id="design-params" class="params"></dl>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Control técnico</h2>
+          </div>
+          <dl id="technical-audit" class="params"></dl>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Especificaciones técnicas</h2>
+          </div>
+          <p id="specs-source" class="panel-note"></p>
+          <div id="specs-list" class="specs"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Pozos de inspección</h2>
+          </div>
+          <ul id="pozos-list" class="notes"></ul>
+        </div>
+
+        <div class="panel panel-muted">
+          <p id="lining-note"></p>
+          <p id="filter-note"></p>
+          <p id="drainage-note"></p>
+          <p id="operation-note"></p>
+          <p id="model-note"></p>
+        </div>
+      </aside>
+    </div>
+
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>

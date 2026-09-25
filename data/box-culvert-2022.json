@@ -1,0 +1,381 @@
+{
+  "titulo": "Box culvert de ocupacion de cauce - Q. Sin Nombre",
+  "fuente": {
+    "laminas": {
+      "dimensional": "D:\\user\\Documents\\usb\\2022\\Anori\\GENERAL\\P-01Box-coulvert dimensional.pdf",
+      "estructural": "D:\\user\\Documents\\usb\\2022\\Anori\\GENERAL\\P-02 Box-coulvert estructural.pdf",
+      "entradaSalida": "D:\\user\\Documents\\usb\\2022\\Anori\\GENERAL\\PL1 Detalle entrada salida Box.pdf"
+    },
+    "proyecto": "Analisis hidrologico Q. Sin Nombre - Solicitud ocupacion de cauce",
+    "empresa": "Empresa de Servicios Publicos de Segovia S.A ESP",
+    "fecha": "enero de 2022",
+    "nota": "laminas archivadas en la carpeta del proyecto de Anori, pero el rotulo es de Segovia; georreferenciadas por su grilla impresa"
+  },
+  "georef": {
+    "metodo": "grilla de coordenadas impresa (4E + 4N rotulos)",
+    "residualM": 0.0
+  },
+  "seccion": {
+    "anchoInterior": 1.5,
+    "altoInterior": 1.5,
+    "espesorPared": 0.25,
+    "espesorLosa": 0.25,
+    "solado": 0.05,
+    "concreto": "f'c 21 MPa (3000 PSI)",
+    "filtrosLaterales": "piedra a ambos costados del box (lamina dimensional)"
+  },
+  "eje": [
+    {
+      "station": 0.0,
+      "east": 932835.12,
+      "north": 1275582.76
+    },
+    {
+      "station": 97.1,
+      "east": 932740.14,
+      "north": 1275602.94
+    },
+    {
+      "station": 167.1,
+      "east": 932708.0,
+      "north": 1275609.76
+    },
+    {
+      "station": 184.35,
+      "east": 932678.61,
+      "north": 1275598.87
+    },
+    {
+      "station": 231.78,
+      "east": 932629.19,
+      "north": 1275615.9
+    },
+    {
+      "station": 291.54,
+      "east": 932604.98,
+      "north": 1275618.82
+    },
+    {
+      "station": 315.89,
+      "east": 932556.89,
+      "north": 1275583.34
+    },
+    {
+      "station": 368.18,
+      "east": 932518.67,
+      "north": 1275555.26
+    },
+    {
+      "station": 399.42,
+      "east": 932510.81,
+      "north": 1275539.91
+    },
+    {
+      "station": 432.26,
+      "east": 932486.84,
+      "north": 1275474.15
+    },
+    {
+      "station": 500.0,
+      "east": 932463.64,
+      "north": 1275410.5
+    }
+  ],
+  "camaras": [
+    {
+      "id": "MH1",
+      "station": 97.1,
+      "east": 932740.14,
+      "north": 1275602.94,
+      "terreno": 497.52,
+      "batea": 490.5,
+      "entrada": 492.62,
+      "salida": 490.75
+    },
+    {
+      "id": "MH2",
+      "station": 167.1,
+      "east": 932708.0,
+      "north": 1275609.76,
+      "terreno": 493.8,
+      "batea": 489.12,
+      "entrada": 490.05,
+      "salida": 489.52
+    },
+    {
+      "id": "MH3",
+      "station": 184.35,
+      "east": 932678.61,
+      "north": 1275598.87,
+      "terreno": 493.09,
+      "batea": 486.19,
+      "entrada": 489.34,
+      "salida": 487.19
+    },
+    {
+      "id": "MH4",
+      "station": 231.78,
+      "east": 932629.19,
+      "north": 1275615.9,
+      "terreno": 490.46,
+      "batea": 484.83,
+      "entrada": 486.71,
+      "salida": 485.3
+    },
+    {
+      "id": "MH5",
+      "station": 291.54,
+      "east": 932604.98,
+      "north": 1275618.82,
+      "terreno": 488.74,
+      "batea": 483.78,
+      "entrada": 484.7,
+      "salida": 484.12
+    },
+    {
+      "id": "MH6",
+      "station": 315.89,
+      "east": 932556.89,
+      "north": 1275583.34,
+      "terreno": 487.95,
+      "batea": 482.88,
+      "entrada": 483.88,
+      "salida": 483.28
+    },
+    {
+      "id": "MH7",
+      "station": 368.18,
+      "east": 932518.67,
+      "north": 1275555.26,
+      "terreno": 486.51,
+      "batea": 481.49,
+      "entrada": 482.76,
+      "salida": 482.01
+    },
+    {
+      "id": "MH8",
+      "station": 399.42,
+      "east": 932510.81,
+      "north": 1275539.91,
+      "terreno": 485.45,
+      "batea": 480.71,
+      "entrada": 481.7,
+      "salida": 481.16
+    },
+    {
+      "id": "MH9",
+      "station": 432.26,
+      "east": 932486.84,
+      "north": 1275474.15,
+      "terreno": 484.59,
+      "batea": 479.29,
+      "entrada": 480.84,
+      "salida": 479.94
+    }
+  ],
+  "entrada": {
+    "station": 0.0,
+    "east": 932835.12,
+    "north": 1275582.76,
+    "llave": 492.3,
+    "fondo": 490.8
+  },
+  "salida": {
+    "station": 500.0,
+    "east": 932463.64,
+    "north": 1275410.5,
+    "llave": 478.2,
+    "fondo": 475.7
+  },
+  "perfilTerreno": [
+    {
+      "station": 0,
+      "z": 506.75
+    },
+    {
+      "station": 20,
+      "z": 498.64
+    },
+    {
+      "station": 40,
+      "z": 497.57
+    },
+    {
+      "station": 60,
+      "z": 496.67
+    },
+    {
+      "station": 80,
+      "z": 495.77
+    },
+    {
+      "station": 100,
+      "z": 494.95
+    },
+    {
+      "station": 120,
+      "z": 494.15
+    },
+    {
+      "station": 140,
+      "z": 493.35
+    },
+    {
+      "station": 160,
+      "z": 492.55
+    },
+    {
+      "station": 180,
+      "z": 491.77
+    },
+    {
+      "station": 200,
+      "z": 490.99
+    },
+    {
+      "station": 220,
+      "z": 490.19
+    },
+    {
+      "station": 240,
+      "z": 489.39
+    },
+    {
+      "station": 260,
+      "z": 488.59
+    },
+    {
+      "station": 280,
+      "z": 487.79
+    },
+    {
+      "station": 300,
+      "z": 487.22
+    },
+    {
+      "station": 320,
+      "z": 486.63
+    },
+    {
+      "station": 340,
+      "z": 486.03
+    },
+    {
+      "station": 360,
+      "z": 485.43
+    },
+    {
+      "station": 380,
+      "z": 484.81
+    },
+    {
+      "station": 400,
+      "z": 484.22
+    },
+    {
+      "station": 420,
+      "z": 483.64
+    },
+    {
+      "station": 440,
+      "z": 483.07
+    },
+    {
+      "station": 460,
+      "z": 482.47
+    },
+    {
+      "station": 480,
+      "z": 481.88
+    }
+  ],
+  "perfilBox": [
+    {
+      "station": 0.0,
+      "z": 504.75,
+      "nota": "derivado: tope del box al nivel del terreno en la entrada"
+    },
+    {
+      "station": 22.0,
+      "z": 492.3,
+      "nota": "pie de la rapida, corona de la llave antisocavacion"
+    },
+    {
+      "station": 97.1,
+      "z": 492.62
+    },
+    {
+      "station": 97.1,
+      "z": 490.75
+    },
+    {
+      "station": 167.1,
+      "z": 490.05
+    },
+    {
+      "station": 167.1,
+      "z": 489.52
+    },
+    {
+      "station": 184.35,
+      "z": 489.34
+    },
+    {
+      "station": 184.35,
+      "z": 487.19
+    },
+    {
+      "station": 231.78,
+      "z": 486.71
+    },
+    {
+      "station": 231.78,
+      "z": 485.3
+    },
+    {
+      "station": 291.54,
+      "z": 484.7
+    },
+    {
+      "station": 291.54,
+      "z": 484.12
+    },
+    {
+      "station": 315.89,
+      "z": 483.88
+    },
+    {
+      "station": 315.89,
+      "z": 483.28
+    },
+    {
+      "station": 368.18,
+      "z": 482.76
+    },
+    {
+      "station": 368.18,
+      "z": 482.01
+    },
+    {
+      "station": 399.42,
+      "z": 481.7
+    },
+    {
+      "station": 399.42,
+      "z": 481.16
+    },
+    {
+      "station": 432.26,
+      "z": 480.84
+    },
+    {
+      "station": 432.26,
+      "z": 479.94
+    },
+    {
+      "station": 500.0,
+      "z": 475.7
+    }
+  ],
+  "advertencia": "El corredor cae fuera del MDT del modelo: la franja de terreno que lo acompana sale del perfil impreso en la lamina estructural, no de curvas de nivel. La estructura NO pasa bajo ningun vaso: ocupa el cauce de la quebrada en la esquina noroccidental del lote."
+}

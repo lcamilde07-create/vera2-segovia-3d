@@ -1,0 +1,28 @@
+{
+  "archivo": "assets/dron/modelo.glb",
+  "titulo": "Vuelo de dron",
+  "vuelo": "2026-07-22",
+  "fuente": "https://lcamilde07-create.github.io/remedios-rio-bagre-3d/",
+  "crsOrigen": "EPSG:32618",
+  "crsDestino": "EPSG:3116",
+  "rtcCenter": [
+    534974,
+    783033,
+    0
+  ],
+  "afin": {
+    "a": 1.0004384712517496,
+    "b": -0.0019864812834384793,
+    "tx": 933073.9428200833,
+    "ty": 1275145.5810562444
+  },
+  "residualM": 0.000404,
+  "zModelo": {
+    "min": 538.44,
+    "max": 607.73
+  },
+  "desfaseVertical": -49.9,
+  "desfaseNota": "Medido contra el terreno del propio proyecto: se toma la cota minima del vuelo en celdas de 4 m (aproxima suelo desnudo bajo la vegetacion) y se compara con el MDT donde este viene de curvas de nivel. La moda sobre 4.006 celdas da 50,0 m y la mediana sobre las 293 celdas que caen en via del levantamiento, 49,86 m. El desfase es de referencia altimetrica: el vuelo trae altura elipsoidal sin ajustar y el proyecto, cota local.",
+  "bytes": 18986928,
+  "desfaseComprobacion": "window.visor.medirDesfaseDron() en la consola del navegador"
+}
