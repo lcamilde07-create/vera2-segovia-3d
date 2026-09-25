@@ -482,7 +482,14 @@ export function buildManholes(model, site, drape) {
   // material del marcador (pin) del MH: se dibuja SIEMPRE por encima del
   // terreno y del vuelo de dron para poder localizarlo, aunque la camara este
   // lejos o la camara quede dentro del vaso.
-  const BEACON_H = 8;   // m, alto del poste-marcador sobre la tapa
+  const BEACON_H = 8;      // m, alto del poste-marcador sobre la tapa
+  const MH_TOP_RADIUS = 3; // m, radio visual de la tapa del MH (~6 m de diametro)
+  const MH_DRUM_H = 1.4;   // m, alto del tambor que sobresale del terreno
+  // la camara del MH se dibuja por encima del terreno (depthTest:false) para que
+  // no quede enterrada donde la malla del terreno o del dron pasa por encima de
+  // la cota de la boca; renderOrder por debajo del pin para que el pin gane.
+  const mhBodyMat = new THREE.MeshStandardMaterial({ color: PALETTE.concrete, roughness: 0.9, metalness: 0, depthTest: false });
+  const mhIronMat = new THREE.MeshStandardMaterial({ color: 0x2b333a, roughness: 0.55, metalness: 0.45, depthTest: false });
   const beaconMat = new THREE.MeshBasicMaterial({ color: 0xf2b705, depthTest: false, depthWrite: false, transparent: true });
   const makeInitials = (text) => {
     const c = document.createElement("canvas");
@@ -502,26 +509,35 @@ export function buildManholes(model, site, drape) {
     return sp;
   };
   const addManholeTop = (x, ytop, z, radius, id) => {
-    const note = `MH ${id} · cámara de salida de lixiviado`;
-    // tapa realista (brocal + tapa de fundicion) para el acercamiento
-    const rim = new THREE.Mesh(new THREE.TorusGeometry(radius + 0.12, 0.14, 8, 22), ironMat);
-    rim.rotation.x = -Math.PI / 2; rim.position.set(x, ytop + 0.06, z);
-    const cover = new THREE.Mesh(new THREE.CircleGeometry(radius, 24), ironMat);
-    cover.rotation.x = -Math.PI / 2; cover.position.set(x, ytop + 0.07, z);
+    const note = `MH ${id} · cámara de salida de lixiviado (tamaño visual 6 m para lectura)`;
+    // camara a escala visual ~6 m de diametro: la real es menor, pero se agranda
+    // para que el MH se lea a distancia (indicacion del equipo). No es cota del
+    // plano. Se levanta como un tambor que sobresale del terreno para que no
+    // quede escondido a ras de suelo.
+    const topR = MH_TOP_RADIUS;
+    const drumH = MH_DRUM_H * site.exaggeration;
+    // cuerpo (brocal de concreto) que sobresale del suelo, dibujado por encima
+    const drum = new THREE.Mesh(new THREE.CylinderGeometry(topR, topR, drumH, 32), mhBodyMat);
+    drum.position.set(x, ytop + drumH / 2, z); drum.renderOrder = 9;
+    // aro y tapa de fundicion encima del tambor
+    const rim = new THREE.Mesh(new THREE.TorusGeometry(topR + 0.2, 0.32, 10, 28), mhIronMat);
+    rim.rotation.x = -Math.PI / 2; rim.position.set(x, ytop + drumH + 0.04, z); rim.renderOrder = 10;
+    const cover = new THREE.Mesh(new THREE.CircleGeometry(topR, 32), mhIronMat);
+    cover.rotation.x = -Math.PI / 2; cover.position.set(x, ytop + drumH + 0.06, z); cover.renderOrder = 10;
 
     // pin siempre visible: poste fino + cabeza, para localizar el MH a distancia
-    const h = BEACON_H * site.exaggeration;
-    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, h, 8), beaconMat);
-    post.position.set(x, ytop + h / 2, z); post.renderOrder = 11;
+    const h = drumH + BEACON_H * site.exaggeration;
+    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, h - drumH, 8), beaconMat);
+    post.position.set(x, ytop + drumH + (h - drumH) / 2, z); post.renderOrder = 11;
     const head = new THREE.Mesh(new THREE.SphereGeometry(0.55, 12, 10), beaconMat);
     head.position.set(x, ytop + h, z); head.renderOrder = 11;
 
     const label = makeInitials(id);
     label.position.set(x, ytop + h + 1.6 * site.exaggeration, z);
 
-    rim.userData.pickable = cover.userData.pickable = label.userData.pickable =
-      post.userData.pickable = head.userData.pickable = note;
-    group.add(rim, cover, post, head, label);
+    drum.userData.pickable = rim.userData.pickable = cover.userData.pickable =
+      label.userData.pickable = post.userData.pickable = head.userData.pickable = note;
+    group.add(drum, rim, cover, post, head, label);
   };
   for (const pozo of model.puntos.pozos || []) {
     const top = site.elevationAt(pozo.east, pozo.north);
