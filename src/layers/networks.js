@@ -479,31 +479,49 @@ export function buildManholes(model, site, drape) {
   // tapa de fundición del manhole (anillo + tapa oscura) para que se lea como
   // una cámara real; encima, las iniciales pequeñas del MH
   const ironMat = new THREE.MeshStandardMaterial({ color: 0x2b333a, roughness: 0.55, metalness: 0.45 });
+  // material del marcador (pin) del MH: se dibuja SIEMPRE por encima del
+  // terreno y del vuelo de dron para poder localizarlo, aunque la camara este
+  // lejos o la camara quede dentro del vaso.
+  const BEACON_H = 8;   // m, alto del poste-marcador sobre la tapa
+  const beaconMat = new THREE.MeshBasicMaterial({ color: 0xf2b705, depthTest: false, depthWrite: false, transparent: true });
   const makeInitials = (text) => {
     const c = document.createElement("canvas");
     c.width = 128; c.height = 64;
     const g = c.getContext("2d");
-    g.fillStyle = "rgba(18,26,32,0.88)";
+    g.fillStyle = "rgba(18,26,32,0.9)";
     g.beginPath(); g.roundRect(4, 12, 120, 40, 9); g.fill();
-    g.strokeStyle = "#f2b705"; g.lineWidth = 2; g.stroke();
-    g.fillStyle = "#f7d774"; g.font = "bold 30px 'Segoe UI',sans-serif";
+    g.strokeStyle = "#f2b705"; g.lineWidth = 3; g.stroke();
+    g.fillStyle = "#ffe08a"; g.font = "bold 30px 'Segoe UI',sans-serif";
     g.textAlign = "center"; g.textBaseline = "middle";
     g.fillText(text, 64, 33);
     const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
-    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
-    sp.scale.set(3.5, 1.75, 1);
+    // depthTest:false -> el rotulo se ve a traves del terreno; renderOrder alto
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false, depthTest: false }));
+    sp.scale.set(4.2, 2.1, 1);
+    sp.renderOrder = 12;
     return sp;
   };
   const addManholeTop = (x, ytop, z, radius, id) => {
+    const note = `MH ${id} · cámara de salida de lixiviado`;
+    // tapa realista (brocal + tapa de fundicion) para el acercamiento
     const rim = new THREE.Mesh(new THREE.TorusGeometry(radius + 0.12, 0.14, 8, 22), ironMat);
     rim.rotation.x = -Math.PI / 2; rim.position.set(x, ytop + 0.06, z);
     const cover = new THREE.Mesh(new THREE.CircleGeometry(radius, 24), ironMat);
     cover.rotation.x = -Math.PI / 2; cover.position.set(x, ytop + 0.07, z);
+
+    // pin siempre visible: poste fino + cabeza, para localizar el MH a distancia
+    const h = BEACON_H * site.exaggeration;
+    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, h, 8), beaconMat);
+    post.position.set(x, ytop + h / 2, z); post.renderOrder = 11;
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.55, 12, 10), beaconMat);
+    head.position.set(x, ytop + h, z); head.renderOrder = 11;
+
     const label = makeInitials(id);
-    label.position.set(x, ytop + 3.2 * site.exaggeration, z);
-    const note = `MH ${id} · cámara de salida de lixiviado`;
-    rim.userData.pickable = cover.userData.pickable = label.userData.pickable = note;
-    group.add(rim, cover, label);
+    label.position.set(x, ytop + h + 1.6 * site.exaggeration, z);
+
+    rim.userData.pickable = cover.userData.pickable = label.userData.pickable =
+      post.userData.pickable = head.userData.pickable = note;
+    group.add(rim, cover, post, head, label);
   };
   for (const pozo of model.puntos.pozos || []) {
     const top = site.elevationAt(pozo.east, pozo.north);
