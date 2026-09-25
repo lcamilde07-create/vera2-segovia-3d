@@ -1,0 +1,419 @@
+{
+  "grid": {
+    "extent": [
+      932912.105,
+      1274970.411,
+      933426.105,
+      1275416.411
+    ],
+    "validCells": 43954,
+    "nullCells": 13838,
+    "interpolatedCells": 7587,
+    "zRange": [
+      481.0,
+      549.0
+    ],
+    "slopeP95": 0.6899999999999977,
+    "slopeP99": 0.8799999999999955,
+    "slopeMax": 4.764999999999986,
+    "steepNonInterpolatedEdges": 79,
+    "flat5x5NaturalWindows": 214,
+    "steepSamples": [
+      [
+        187,
+        216,
+        187,
+        217,
+        2.305000000000007,
+        528.26,
+        523.65
+      ],
+      [
+        188,
+        216,
+        188,
+        217,
+        2.150000000000034,
+        528.34,
+        524.04
+      ],
+      [
+        189,
+        216,
+        189,
+        217,
+        2.0,
+        528.42,
+        524.42
+      ],
+      [
+        190,
+        216,
+        190,
+        217,
+        1.8500000000000227,
+        528.5,
+        524.8
+      ],
+      [
+        191,
+        216,
+        191,
+        217,
+        1.69500000000005,
+        528.57,
+        525.18
+      ],
+      [
+        192,
+        216,
+        192,
+        217,
+        1.5399999999999636,
+        528.65,
+        525.57
+      ],
+      [
+        190,
+        217,
+        190,
+        218,
+        2.409999999999968,
+        524.8,
+        519.98
+      ],
+      [
+        191,
+        217,
+        191,
+        218,
+        3.419999999999959,
+        525.18,
+        518.34
+      ],
+      [
+        192,
+        217,
+        192,
+        218,
+        4.19500000000005,
+        525.57,
+        517.18
+      ],
+      [
+        193,
+        217,
+        193,
+        218,
+        4.045000000000016,
+        525.96,
+        517.87
+      ]
+    ]
+  },
+  "contoursVsGrid": {
+    "samples": 7320,
+    "median": -0.02484808128633631,
+    "absP95": 1.112366953131607,
+    "absMax": 6.660265674379502,
+    "missing": 2
+  },
+  "recordContoursVsGrid": {
+    "available": true,
+    "records": 316,
+    "fields": [
+      [
+        "FID_",
+        "N",
+        10,
+        0
+      ],
+      [
+        "Entity",
+        "C",
+        16,
+        0
+      ],
+      [
+        "Layer",
+        "C",
+        254,
+        0
+      ],
+      [
+        "Color",
+        "N",
+        10,
+        0
+      ],
+      [
+        "Linetype",
+        "C",
+        254,
+        0
+      ],
+      [
+        "Elevation",
+        "F",
+        19,
+        11
+      ],
+      [
+        "LineWt",
+        "N",
+        10,
+        0
+      ],
+      [
+        "RefName",
+        "C",
+        254,
+        0
+      ]
+    ],
+    "bbox": [
+      932908.2221999997,
+      1274971.2295999993,
+      933425.8892999999,
+      1275417.830600001
+    ],
+    "outsideSamples": 52,
+    "bestElevationSource": "geometryZ",
+    "best": {
+      "samples": 25652,
+      "median": -0.1366988532553819,
+      "absP95": 17.18606464506547,
+      "absMax": 30.921961645840724
+    },
+    "status": "external_source_conflict",
+    "resolution": "No se integra al MDT: las curvas record son una fuente externa incompatible con el plano base de topografia y con las comprobaciones de secciones/cotas.",
+    "conflictZone": {
+      "thresholdM": 10.0,
+      "samples": 2638,
+      "bbox": [
+        932912.1831999999,
+        1275105.8409000002,
+        933150.4391999999,
+        1275397.5629999992
+      ],
+      "medianDiff": -17.126503045997197,
+      "maxAbsDiff": 30.921961645840724
+    },
+    "naturalOnly": {
+      "samples": 25652,
+      "median": -0.1366988532553819,
+      "absP95": 17.18606464506547,
+      "absMax": 30.921961645840724
+    },
+    "interpolatedOnly": {
+      "samples": 0,
+      "median": null,
+      "absP95": null,
+      "absMax": null
+    },
+    "worstSamples": [
+      {
+        "absDiff": 30.922,
+        "diff": -30.922,
+        "east": 932917.545,
+        "north": 1275179.153,
+        "gridZ": 536.078,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.922,
+        "diff": -30.922,
+        "east": 932917.545,
+        "north": 1275179.153,
+        "gridZ": 536.078,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.922,
+        "diff": -30.922,
+        "east": 932917.603,
+        "north": 1275179.23,
+        "gridZ": 536.078,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.922,
+        "diff": -30.922,
+        "east": 932917.603,
+        "north": 1275179.23,
+        "gridZ": 536.078,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.921,
+        "diff": -30.921,
+        "east": 932917.675,
+        "north": 1275179.325,
+        "gridZ": 536.079,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.921,
+        "diff": -30.921,
+        "east": 932917.675,
+        "north": 1275179.325,
+        "gridZ": 536.079,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.92,
+        "diff": -30.92,
+        "east": 932917.76,
+        "north": 1275179.435,
+        "gridZ": 536.08,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.92,
+        "diff": -30.92,
+        "east": 932917.76,
+        "north": 1275179.435,
+        "gridZ": 536.08,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.906,
+        "diff": -30.906,
+        "east": 932917.47,
+        "north": 1275179.177,
+        "gridZ": 536.094,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.906,
+        "diff": -30.906,
+        "east": 932917.47,
+        "north": 1275179.177,
+        "gridZ": 536.094,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.886,
+        "diff": -30.886,
+        "east": 932917.378,
+        "north": 1275179.21,
+        "gridZ": 536.114,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.886,
+        "diff": -30.886,
+        "east": 932917.378,
+        "north": 1275179.21,
+        "gridZ": 536.114,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.876,
+        "diff": -30.876,
+        "east": 932917.331,
+        "north": 1275179.227,
+        "gridZ": 536.124,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.876,
+        "diff": -30.876,
+        "east": 932917.331,
+        "north": 1275179.227,
+        "gridZ": 536.124,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.873,
+        "diff": -30.873,
+        "east": 932917.318,
+        "north": 1275179.232,
+        "gridZ": 536.127,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.873,
+        "diff": -30.873,
+        "east": 932917.318,
+        "north": 1275179.232,
+        "gridZ": 536.127,
+        "recordZ": 567.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.122,
+        "diff": -30.122,
+        "east": 932918.818,
+        "north": 1275178.339,
+        "gridZ": 535.878,
+        "recordZ": 566.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.122,
+        "diff": -30.122,
+        "east": 932918.818,
+        "north": 1275178.339,
+        "gridZ": 535.878,
+        "recordZ": 566.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.105,
+        "diff": -30.105,
+        "east": 932919.031,
+        "north": 1275178.616,
+        "gridZ": 535.895,
+        "recordZ": 566.0,
+        "layer": "TN DIC 2022_Contours"
+      },
+      {
+        "absDiff": 30.105,
+        "diff": -30.105,
+        "east": 932919.031,
+        "north": 1275178.616,
+        "gridZ": 535.895,
+        "recordZ": 566.0,
+        "layer": "TN DIC 2022_Contours"
+      }
+    ],
+    "candidates": {
+      "geometryZ": {
+        "samples": 25652,
+        "median": -0.1366988532553819,
+        "absP95": 17.18606464506547,
+        "absMax": 30.921961645840724
+      },
+      "Elevation": {
+        "samples": 25652,
+        "median": -0.1366988532553819,
+        "absP95": 17.18606464506547,
+        "absMax": 30.921961645840724
+      }
+    },
+    "byLayer": {
+      "TN DIC 2022_Contours": {
+        "samples": 25652,
+        "median": -0.1366988532553819,
+        "absP95": 17.18606464506547,
+        "absMax": 30.921961645840724
+      }
+    }
+  }
+}
